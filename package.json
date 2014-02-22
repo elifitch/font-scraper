@@ -1,0 +1,22 @@
+{
+  "name": "font-scraper",
+  "version": "0.0.0",
+  "description": "Scrapes fonts from CSS files",
+  "main": "font-scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elifitch/font-scraper.git"
+  },
+  "keywords": [
+    "scraper"
+  ],
+  "author": "Eli Fitch",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/elifitch/font-scraper/issues"
+  },
+  "homepage": "https://github.com/elifitch/font-scraper"
+}
