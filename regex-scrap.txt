@@ -1,0 +1,5 @@
+MORE INCLUSIVE NAMEREGEX with support for single double quotes and whitespaces
+[f][o][n][t][-][f][a][m][i][l][y][:](?:"|'|\s+"|\s+')(.+?)(?="|')
+
+
+//INCLUSIVE NAMEPREPLACE ([f][o][n][t][-][f][a][m][i][l][y][:])("|'|\s+"|\s+')
