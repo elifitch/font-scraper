@@ -9,6 +9,9 @@ var exec = require('child_process').exec;
 		console.log('You need to pass in a URL as an argument \n Example: node head-scrape.js http://www.google.com')
 	}
 	var host = process.argv[2];
+
+    var externalLinkCheck = new RegExp('^http');
+
     request(host, function(err, resp, body) {
     	$ = cheerio.load(body);
         //if the DOM doesn't have an HTML tag, length of cheerio obj will be 0
@@ -19,11 +22,10 @@ var exec = require('child_process').exec;
         }
 
     	for(var i=0; i<css.length; i++) {
-    		console.log('CSS files available at ' + host + css[i].attribs.href);
+            if (css[i].attribs.href.toString().match(externalLinkCheck) ) {
+                console.log('CSS files available at ' + css[i].attribs.href);
+            }
+    		else{ console.log('CSS files available at ' + host + css[i].attribs.href); }
     	}
     })
 }());
-
-//NOTES
-//1. Try the script on http://www.sbnation.com.  CSS delivered by CDN. Need to test always if hard link or relative link
-//		and act accordingly
