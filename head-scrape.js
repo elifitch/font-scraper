@@ -24,8 +24,16 @@ var exec = require('child_process').exec;
     	for(var i=0; i<css.length; i++) {
             if (css[i].attribs.href.toString().match(externalLinkCheck) ) {
                 console.log('CSS files available at ' + css[i].attribs.href);
+                // request(css[i].attribs.href, function(err, resp, body){
+                //     console.log(body);
+                // });
             }
-    		else{ console.log('CSS files available at ' + host + css[i].attribs.href); }
+    		else {
+                // console.log('CSS files available at ' + host + css[i].attribs.href);
+                request(host + css[i].attribs.href, function(err, resp, body){
+                    console.log(body);
+                });
+            }
     	}
     })
 }());
