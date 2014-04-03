@@ -9,7 +9,7 @@ var exec = require('child_process').exec;
     var path = 'https://cae.careersite.ingageprojects.com/Content/fonts/';
     var host = 'https://cae.careersite.ingageprojects.com/Content/fonts/bentonfonts.min.css';
     // var str = '@charset "UTF-8";@font-face{font-family:"BentonSansRegular";src:url("d14dadb9-9478-485d-b2ef-50391bc26c1b-2.eot");src:url("d14dadb9-9478-485d-b2ef-50391bc26c1b-2.eot?") format("embedded-opentype"),url("d14dadb9-9478-485d-b2ef-50391bc26c1b-3.woff") format("woff"),url("d14dadb9-9478-485d-b2ef-50391bc26c1b-1.ttf") format("truetype");font-style:normal;font-weight:normal}@font-face{font-family:"BentonSansMedium";src:url("620be4bf-1d8f-4cab-9cd5-66020b87dd54-2.eot");src:url("620be4bf-1d8f-4cab-9cd5-66020b87dd54-2.eot?") format("embedded-opentype"),url("620be4bf-1d8f-4cab-9cd5-66020b87dd54-3.woff") format("woff"),url("620be4bf-1d8f-4cab-9cd5-66020b87dd54-1.ttf") format("truetype");font-style:normal;font-weight:bold}@font-face{font-family:"BentonSansLight";src:url("b35ebeff-439e-4606-8e27-e48d9d48d11a-2.eot");src:url("b35ebeff-439e-4606-8e27-e48d9d48d11a-2.eot?") format("embedded-opentype"),url("b35ebeff-439e-4606-8e27-e48d9d48d11a-3.woff") format("woff"),url("b35ebeff-439e-4606-8e27-e48d9d48d11a-1.ttf") format("truetype");font-style:normal;font-weight:normal}@font-face{font-family:"BentonSansBook";src:url("b934fe58-6faa-40de-a80c-37c2bd5fd874-2.eot");src:url("b934fe58-6faa-40de-a80c-37c2bd5fd874-2.eot?") format("embedded-opentype"),url("b934fe58-6faa-40de-a80c-37c2bd5fd874-3.woff") format("woff"),url("b934fe58-6faa-40de-a80c-37c2bd5fd874-1.ttf") format("truetype");font-style:normal;font-weight:normal}@font-face{font-family:"BentonSansRegular";src:url("21eafd49-85ac-45c0-8c44-0301205fc73c-2.eot");src:url("21eafd49-85ac-45c0-8c44-0301205fc73c-2.eot?") format("embedded-opentype"),url("21eafd49-85ac-45c0-8c44-0301205fc73c-3.woff") format("woff"),url("21eafd49-85ac-45c0-8c44-0301205fc73c-1.ttf") format("truetype");font-style:normal;font-weight:bold}';
-    var str = "@font-face { font-family: 'Kite One'; font-style: normal; font-weight: 400;src: local('Kite One'), local('KiteOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/kiteone/v2/VNHoD96LpZ9rGZTwjozAOnYhjbSpvc47ee6xR_80Hnw.woff) format('woff');}";
+    var str = "@font-face { font-family: 'Kite One'; font-style: normal; font-weight: 400;src: local('Kite One'), local('KiteOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/kiteone/v2/VNHoD96LpZ9rGZTwjozAOnYhjbSpvc47ee6xR_80Hnw.woff?ieifix) format('woff');}";
  
     var fontFaceRegex = new RegExp('[@][f][o][n][t][-][f][a][c][e]', 'g');
     // old var dlRegex = new RegExp('url\\("([\\S]+.[eot|woff|ttf])(?=")', 'g');
@@ -24,7 +24,8 @@ var exec = require('child_process').exec;
 
     //Splits CSS into substrings based on where font-face is declared so you can capture
     //the font family as the file name of the font files that follow it
-    var fontFace = str.split( fontFaceRegex );
+    var fontFace = str.replace(/(\?.+?)(?=\))|(\?.+?)(?=")|(\?.+?)(?=\')/g, '').split( fontFaceRegex );
+    console.log(fontFace);
 
     //loop thru the substrings
     for(var i=0; i<fontFace.length; i++) {
