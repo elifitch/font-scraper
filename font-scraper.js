@@ -72,6 +72,14 @@ var exec = require('child_process').exec;
         };  
     };
 }());
-
 //Breaks when you try the google font string, because it says fontFace[i] is undefined...
+//Can't handle download locations that aren't relative links atm
 //Breaks when ?iefix at end of font location, check uhg scraper for more
+
+
+//need to trim hash values off svg fonts, but the non-capturing group is captured. what gives
+// var str = "url(https://cae.careersite.ingageprojects.com/Content/fonts/b35ebeff-439e-4606-8e27-e48d9d48d11a-3.svg#98732983749395)";
+// var shit = str.replace(/(?:\.svg)(#\S+?)(?=\s*?\)|\s*?'|\s*?")/g, '');
+// console.log(shit);
+//SOLUTION: JUST SPLIT THE STRING ON # AND TAKE THE LEFT PART! Look to do this with ?iefix and other shit as well!
+
