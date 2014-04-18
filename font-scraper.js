@@ -22,7 +22,6 @@ var exec = require('child_process').exec;
     //Splits CSS into substrings based on where font-face is declared so you can capture
     //the font family as the file name of the font files that follow it
     var fontFace = str.replace(/(\?.+?)(?=\))|(\?.+?)(?=")|(\?.+?)(?=\')/g, '').split( fontFaceRegex );
-    console.log(fontFace);
 
     //loop thru the substrings
     for(var i=0; i<fontFace.length; i++) {
@@ -37,35 +36,37 @@ var exec = require('child_process').exec;
         //find file urls and don't process object if it doesn't have a name
         //to avoid issues with stuff like charset and other CSS declarations
         if(font.name) {
+            // console.log(font);
             //checks to see if url contains any " or ', has to use different regex if not
-            if(fontFace[i].indexOf(/url\(\s*?"\s*?|url\(\s*?'\s*?/g) === -1) {
+            if(fontFace[i].search(/url\(\s*?"\s*?|url\(\s*?'\s*?/g) !== -1) {
+                console.log(fontFace[i].search(/url\(\s*?"\s*?|url\(\s*?'\s*?/g))
                 // console.log(fontFace[i].indexOf(/url\(\s*?"\s*?|url\(\s*?'\s*?/g));
                 font.downloadList = fontFace[i].match( dlRegex ).toString().replace(dlReplace, '').trim().split(',');
-                console.log(font);
+                // console.log(font);
             } else {
                 // console.log('nope'+fontFace[i].indexOf(/url\(\s*?"\s*?|url\(\s*?'\s*?/g));
                 //selects font src urls without any " or '
                 font.downloadList = fontFace[i].match( /url\((?:\s*?)([\S]+.[eot|woff|ttf])(?=\s*?\))/g ).toString().replace(/url\(/, '').trim().split(',');
-                console.log(font);
+                // console.log(font);
             }
             
 
             // splits download list into individual files, notes the extension, and creates a real dl URL
-            for(var j=0; j<font.downloadList.length; j++) {
-                var filePieces = font.downloadList[j].toString().trim().split('.');
-                font.fileName = filePieces[0];
-                font.fileExtension = filePieces[1];
-                // console.log(font.fileName + '.' + font.fileExtension + ' saved as '+font.name+'.'+font.fileExtension)
-                //QUESTION: if you log font.fileName before child is exec'd you see all the loops are looped before DLing the files
-                //How to properly set up loop so it DLs files WITHIN the 'j' for loop
-                //if you log 'j' in child result to check loop status, it's alwasy 3...
-                var wget ='wget '+ path + font.fileName+'.'+font.fileExtension + ' -O ' + dlDir +'/'+ font.name+'.'+font.fileExtension;
-                var child = exec(wget, function(err, stdout,stderr){
-                    if (err) throw err;
-                    else console.log(font.fileName + '.' + font.fileExtension + ' saved as '+font.name+'.'+font.fileExtension);
-                 });
+            // for(var j=0; j<font.downloadList.length; j++) {
+            //     var filePieces = font.downloadList[j].toString().trim().split('.');
+            //     font.fileName = filePieces[0];
+            //     font.fileExtension = filePieces[1];
+            //     // console.log(font.fileName + '.' + font.fileExtension + ' saved as '+font.name+'.'+font.fileExtension)
+            //     //QUESTION: if you log font.fileName before child is exec'd you see all the loops are looped before DLing the files
+            //     //How to properly set up loop so it DLs files WITHIN the 'j' for loop
+            //     //if you log 'j' in child result to check loop status, it's alwasy 3...
+            //     var wget ='wget '+ path + font.fileName+'.'+font.fileExtension + ' -O ' + dlDir +'/'+ font.name+'.'+font.fileExtension;
+            //     var child = exec(wget, function(err, stdout,stderr){
+            //         if (err) throw err;
+            //         else console.log(font.fileName + '.' + font.fileExtension + ' saved as '+font.name+'.'+font.fileExtension);
+            //      });
 
-            };
+            // };
         };  
     };
 }());
@@ -79,4 +80,6 @@ var exec = require('child_process').exec;
 // var shit = str.replace(/(?:\.svg)(#\S+?)(?=\s*?\)|\s*?'|\s*?")/g, '');
 // console.log(shit);
 //SOLUTION: JUST SPLIT THE STRING ON # AND TAKE THE LEFT PART! Look to do this with ?iefix and other shit as well!
-
+// function killQMark(string) {
+//     console.log(string.replace(/\?.*?(?="|'|\)/g,'').trim());
+// }
