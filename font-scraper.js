@@ -12,14 +12,11 @@ var exec = require('child_process').exec;
     // var str = "@font-face { font-family: 'Kite One'; font-style: normal; font-weight: 400;src: local('Kite One'), local('KiteOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/kiteone/v2/VNHoD96LpZ9rGZTwjozAOnYhjbSpvc47ee6xR_80Hnw.woff?ieifix) format('woff');}";
  
     var fontFaceRegex = new RegExp('[@][f][o][n][t][-][f][a][c][e]', 'g');
-    // old var dlRegex = new RegExp('url\\("([\\S]+.[eot|woff|ttf])(?=")', 'g');
+
     var dlRegex = new RegExp('url\\((?:\\s*?"\\s*?|\\s*?\'\\s*?)([\\S]+.[eot|woff|ttf])(?=\\s*?"\\s*?|\\s*?\'\\s*?)','g');
-    // old var dlReplace = new RegExp('[u][r][l][(]["]', 'g');
     var dlReplace = new RegExp('url\\(\\s*?"\\s*?|url\\(\\s*?\'\\s*?', 'g');
 
-    // old var nameRegex = new RegExp('[f][o][n][t][-][f][a][m][i][l][y][:]["]([\\S]+?.)(?=")','g');
     var nameRegex = new RegExp('[f][o][n][t][-][f][a][m][i][l][y][:](?:\\s*?"\\s*?|\\s*?\'\\s*?)([\\S].*?)(?=\\s*?"\\s*?|\\s*?\'\\s*?)','g');
-    // old var nameReplace = new RegExp('[f][o][n][t][-][f][a][m][i][l][y][:]["]');
     var nameReplace = new RegExp('[f][o][n][t][-][f][a][m][i][l][y][:](?:\\s*?"\\s*?|\\s*?\'\\s*?)');
 
     //Splits CSS into substrings based on where font-face is declared so you can capture
