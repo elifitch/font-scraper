@@ -53,7 +53,6 @@ var exec = require('child_process').exec;
                     cssFiles[index].code = body;
                     //calls get fonts function here
                     getFonts(cssFiles[index]);
-                    console.log('\n \n \n \n \n \n \n \n \n \n DONE WITH THIS CSS FILE ON TO NEXT ONE \n \n \n \n \n \n \n \n \n \n')
                 });
             });
         })
