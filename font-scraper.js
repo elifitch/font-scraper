@@ -9,7 +9,7 @@ var exec = require('child_process').exec;
     var host = process.argv[2];
 
     if(process.argv[2] === undefined) {
-        console.log('You need to pass in a URL as an argument \n Example: node head-scrape.js http://www.google.com')
+        console.log('You need to pass in a URL as an argument \n Example: node font-scraper.js http://www.google.com')
     }
 
     var dlDir = './downloads';
